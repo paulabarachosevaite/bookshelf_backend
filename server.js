@@ -5,11 +5,19 @@ import {errorHandler} from "./middleware/errorMiddleware.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import listRoutes from "./routes/listRoutes.js";
-
+import cors from "cors";
 dotenv.config();
 const PORT = process.env.PORT || 5001;
 const app = express();
 connectDB();
+
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(errorHandler);
